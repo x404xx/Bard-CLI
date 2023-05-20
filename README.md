@@ -16,7 +16,7 @@ Go to https://bard.google.com/
 -   Copy the values
     -   Session: Go to Application → Cookies → `__Secure-1PSID`. Copy the value of that cookie.
 
-<img src="https://github.com/x404xx/Bard-CLI/assets/114883816/6c221352-5c60-41f3-82cf-0bf773a58071" width="800" height="400">
+    <img src="https://github.com/x404xx/Bard-CLI/assets/114883816/6c221352-5c60-41f3-82cf-0bf773a58071" width="650" height="350">
 
 > **Note**
 > After obtaining a `__Secure-1PSID`, you can save them somewhere and then run the program. By default, the program will ask you for a `__Secure-1PSID` and make the JSON file automatically for you. Alternatively, you can create the **.env** or JSON file (**_bard_cookies.json_**) manually.
