@@ -155,7 +155,6 @@ class BardAPI:
             except Exception as exc:
                 status.fail(f'Requests encountered an error: {str(exc)}')
                 Utils.exit_program()
-
             else:
                 chat_data = json.loads(response.content.splitlines()[3])[0][2]
                 if not chat_data:
@@ -181,12 +180,12 @@ class BardAPI:
 
 class BardCookies:
     CONFIG_FILE = 'bard_cookies.json'
-    MISSING_CONFIG = dedent("""
+    MISSING_CONFIG = """
     ⚠️  Could not find BARD_COOKIES in environment variables or configuration.
     ⚠️  Please choose one of the following options:
         [1] Manually enter BARD_COOKIES
         [2] Exit
-    """)
+    """
 
     @staticmethod
     def user_choice() -> Dict[str, str]:
@@ -210,12 +209,12 @@ class BardCookies:
         try:
             with open(cls.CONFIG_FILE, 'r') as file:
                 return json.load(file)
-        except (FileNotFoundError, json.JSONDecodeError) as e:
+        except (FileNotFoundError, json.JSONDecodeError):
             return {}
 
     @classmethod
     def prompt_user_choice(cls) -> Dict[str, str]:
-        print(cls.MISSING_CONFIG)
+        print(dedent(cls.MISSING_CONFIG))
         return cls.user_choice()
 
     @classmethod
