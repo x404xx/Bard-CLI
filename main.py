@@ -1,18 +1,24 @@
 from argparse import ArgumentParser
+from os import getenv
 from pathlib import Path
 from sys import stdout
 from textwrap import dedent
 from time import sleep
+
+from dotenv import load_dotenv; load_dotenv()
 
 from classes import BardAPI, BardCookies, Colors, Utils
 
 
 class StartBard:
     def __init__(
-        self, delay: float = 0.003
+        self,
+        delay: float = 0.003,
+        proxy: str = None
         ):
 
         self.delay = delay
+        self.proxy = proxy
         self.result()
 
     def delay_print(
@@ -69,7 +75,7 @@ class StartBard:
 
         config = BardCookies.get_configuration(session)
         if config.get('BARD_COOKIES'):
-            return BardAPI(session_id=config['BARD_COOKIES'])
+            return BardAPI(session_id=config['BARD_COOKIES'], proxy=self.proxy)
         return None
 
     def parse_arguments(self) -> str:
@@ -110,5 +116,10 @@ class StartBard:
 
 
 if __name__ == '__main__':
-    StartBard(delay=0.002)
+    """
+    If you want to use a proxy,
+    Please update your PROXY in the environment variable or in the .env file.
+    Otherwise, leave it as it is; it will be set to None.
+    """
+    StartBard(delay=0.002, proxy=getenv('PROXY'))
 
