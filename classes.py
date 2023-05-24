@@ -53,11 +53,8 @@ class Formatter:
         ) -> str:
 
         code = highlight(text, PythonLexer(), Terminal256Formatter(style='fruity')).strip()
-        highlighted_text = ''
-        for line in code.splitlines():
-            line = line.replace('python', '')
-            highlighted_text += f'{cls.CODE_INDENT}{line}\n'
-        return highlighted_text
+        highlighted_lines = [cls.CODE_INDENT + line.replace('python', '') for line in code.splitlines()]
+        return '\n'.join(highlighted_lines)
 
     @classmethod
     def final_text(
@@ -65,11 +62,11 @@ class Formatter:
         response: str
         ) -> str:
 
+        sections = response.split(cls.CODE_INDENTIFIER)
         formatted_text = ''
-        for idx, text in enumerate(response.split(cls.CODE_INDENTIFIER)):
-            if not idx % 2:
-                text = cls.code_block(f'{Colors.LPURPLE}{text}{Colors.END}')
-                formatted_text += text
+        for idx, text in enumerate(sections):
+            if idx % 2 == 0:
+                formatted_text += cls.code_block(f'{Colors.LPURPLE}{text}{Colors.END}')
             else:
                 formatted_text += cls.highlight_code(text)
         return formatted_text
@@ -127,7 +124,7 @@ class BardAPI:
         ) -> str:
 
         params = {
-            'bl': 'boq_assistant-bard-web-server_20230521.19_p0',
+            'bl': 'boq_assistant-bard-web-server_20230523.13_p0',
             '_reqid': str(self.reqid),
             'rt': 'c',
         }
