@@ -124,7 +124,7 @@ class BardAPI:
         ) -> str:
 
         params = {
-            'bl': 'boq_assistant-bard-web-server_20230523.13_p1',
+            'bl': 'boq_assistant-bard-web-server_20230531.15_p3',
             '_reqid': str(self.reqid),
             'rt': 'c',
         }
