@@ -31,7 +31,7 @@ pip install -r requirements.txt
 
 Authenticate _Bard-CLI_ with command-line ::
 
-```sh
+```python
 python main.py --session YOUR__Secure-1PSID
 ```
 
